@@ -81,4 +81,20 @@ wget -c -O "$BASE/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors" \
 wget -c -O "$BASE/vae/wan_2.1_vae.safetensors" \
   "https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/vae/wan_2.1_vae.safetensors" || true
 
+# Download the whole workflows folder from GitHub
+echo "=== Downloading workflows folder ==="
+WORKFLOW_DIR="/workspace/ComfyUI/user/default/workflows"
+mkdir -p "$WORKFLOW_DIR"
+
+# Sparse checkout so we only get the workflows folder
+cd /tmp
+rm -rf vast-workflows
+git clone --depth 1 --filter=blob:none --sparse https://github.com/unrealn3r/vast.git vast-workflows
+cd vast-workflows
+git sparse-checkout set workflows
+cp -r workflows/* "$WORKFLOW_DIR/" || true
+
+echo "Workflows copied to $WORKFLOW_DIR"
+ls -la "$WORKFLOW_DIR"
+
 echo "=== Provisioning complete ==="
