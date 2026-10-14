@@ -63,8 +63,8 @@ wget -c -O "$BASE/loras/qwen_2512_pussy_anus_v2.safetensors" \
 wget -c -O "$BASE/loras/qwen-edit-skin_1.1_000002750.safetensors" \
   "https://huggingface.co/tlennon-ie/qwen-edit-skin/resolve/main/qwen-edit-skin_1.1_000002750.safetensors" || true
 
-wget -c -O "$BASE/loras/qwen_image_smartphone_snapshot_photo_reality_v4.safetensors" \
-  "https://huggingface.co/ribilu74/qwensnapshot/resolve/main/qwen_image_smartphone_snapshot_photo_reality_v4.safetensors" || true
+wget -c -O "$BASE/loras/Qwen-Smartphone.safetensors" \
+  "https://huggingface.co/ribilu74/qwensnapshot/resolve/main/Qwen-Smartphone.safetensors" || true
 
 rm -f "$BASE/loras/AmateurSelfie_v2.safetensors" || true
 
