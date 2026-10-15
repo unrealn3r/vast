@@ -90,18 +90,13 @@ wget -c -O /workspace/ship2hf.sh \
 chmod +x /workspace/ship2hf.sh
 echo "Saved to /workspace/ship2hf.sh"
 
-echo "=== Downloading workflows from private Hugging Face repo ==="
+echo "=== Downloading workflows from private Hugging Face bucket ==="
 WORKFLOW_DIR="/workspace/ComfyUI/user/default/workflows"
 mkdir -p "$WORKFLOW_DIR"
 
-pip install -q huggingface_hub || true
-
 if [ -n "$HF_TOKEN" ]; then
-  huggingface-cli download unrealn3r/workflows \
-    --local-dir "$WORKFLOW_DIR" \
-    --token "$HF_TOKEN" \
-    --repo-type model || true
-  echo "Workflows downloaded to $WORKFLOW_DIR"
+  hf buckets sync hf://buckets/unrealn3r/workflows "$WORKFLOW_DIR" || true
+  echo "Workflows synced to $WORKFLOW_DIR"
   ls -la "$WORKFLOW_DIR"
 else
   echo "Warning: HF_TOKEN not set, skipping private workflow download"
