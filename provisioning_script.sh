@@ -81,6 +81,7 @@ echo "Place additional anatomy LoRAs into $BASE/loras/ manually."
 
 hf buckets cp hf://buckets/unrealn3r/vast_loras/scg-anatomy-female-v2.safetensors /workspace/ComfyUI/models/loras/ || true
 hf buckets cp hf://buckets/unrealn3r/vast_loras/MS_Nude_Style_Flux_V2.safetensors /workspace/ComfyUI/models/loras/ || true
+hf buckets cp hf://buckets/unrealn3r/vast_loras/ae.safetensors /workspace/ComfyUI/models/vae/ae.safetensors || true
 
 # Qwen models
 #wget -c -O "$BASE/diffusion_models/qwen_image_edit_2511_fp8mixed.safetensors" \
