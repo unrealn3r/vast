@@ -23,11 +23,6 @@ if [ ! -d "ComfyUI-GGUF" ]; then
 fi
 pip install -q -r ComfyUI-GGUF/requirements.txt || true
 
-# Quality of Life Suit V2
-if [ ! -d "ComfyUI-QualityOfLifeSuit_V2" ]; then
-  git clone --depth 1 https://github.com/MAKKER/ComfyUI-QualityOfLifeSuit_V2
-fi
-
 # rgthree-comfy
 if [ ! -d "rgthree-comfy" ]; then
   git clone --depth 1 https://github.com/rgthree/rgthree-comfy
