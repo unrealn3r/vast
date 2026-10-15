@@ -89,7 +89,7 @@ cd /tmp
 wget -c -O antelopev2.zip \
   "https://github.com/deepinsight/insightface/releases/download/v0.7/antelopev2.zip"
 
-unzip -o antelopev2.zip -d /workspace/ComfyUI/models/insightface/models/antelopev2/
+unzip -o antelopev2.zip -d /workspace/ComfyUI/models/insightface/models/
 
 ls -lh /workspace/ComfyUI/models/insightface/models/antelopev2/
 
