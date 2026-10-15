@@ -66,20 +66,50 @@ wget -c -O "$BASE/loras/qwen-edit-skin_1.1_000002750.safetensors" \
 wget -c -O "$BASE/loras/Qwen-Smartphone.safetensors" \
   "https://huggingface.co/ribilu74/qwensnapshot/resolve/main/Qwen-Smartphone.safetensors" || true
 
-rm -f "$BASE/loras/AmateurSelfie_v2.safetensors" || true
+  # AmateurSelfie
+wget -c -O "$BASE/loras/AmateurSelfie_v2.safetensors" \
+  "https://huggingface.co/unrealn3r/vast_loras/resolve/main/AmateurSelfie_v2.safetensors" || true
+
+# HearmemanAI Breasts
+wget -c -O "$BASE/loras/HearmemanAI_V4_Rank128_BreastsLoRA_Epoch80.safetensors" \
+  "https://huggingface.co/unrealn3r/vast_loras/resolve/main/HearmemanAI_V4_Rank128_BreastsLoRA_Epoch80.safetensors" || true
+
+# Unblur and Upscale
+wget -c -O "$BASE/loras/Qwen-Image-Edit-Unblur-Upscale_20.safetensors" \
+  "https://huggingface.co/unrealn3r/vast_loras/resolve/main/Qwen-Image-Edit-Unblur-Upscale_20.safetensors" || true
+
+# SEXGOD Female Nudity v2
+wget -c -O "$BASE/loras/SEXGOD_FemaleNudity_QwenEdit_2511_v2.safetensors" \
+  "https://huggingface.co/unrealn3r/vast_loras/resolve/main/SEXGOD_FemaleNudity_QwenEdit_2511_v2.safetensors" || true
+
+# SEXGOD Masturbate
+wget -c -O "$BASE/loras/SEXGOD_masturbate_QwenEdit2511_v1.safetensors" \
+  "https://huggingface.co/unrealn3r/vast_loras/resolve/main/SEXGOD_masturbate_QwenEdit2511_v1.safetensors" || true
+
+# SexGod Couples Nudity
+wget -c -O "$BASE/loras/SexGod_CouplesNudity_QwenEdit_2511_v1.safetensors" \
+  "https://huggingface.co/unrealn3r/vast_loras/resolve/main/SexGod_CouplesNudity_QwenEdit_2511_v1.safetensors" || true
+
+# NSFW Adv
+wget -c -O "$BASE/loras/qwen-image_nsfw_adv_v1.0.safetensors" \
+  "https://huggingface.co/unrealn3r/vast_loras/resolve/main/qwen-image_nsfw_adv_v1.0.safetensors" || true
+
+# Pussy & Anus
+wget -c -O "$BASE/loras/qwen_2512_pussy_anus_v2.safetensors" \
+  "https://huggingface.co/unrealn3r/vast_loras/resolve/main/qwen_2512_pussy_anus_v2.safetensors" || true
 
 # Wan 2.2
-wget -c -O "$BASE/diffusion_models/wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors" \
-  "https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/diffusion_models/wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors" || true
+#wget -c -O "$BASE/diffusion_models/wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors" \
+#  "https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/diffusion_models/wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors" || true
 
-wget -c -O "$BASE/diffusion_models/wan2.2_i2v_low_noise_14B_fp8_scaled.safetensors" \
-  "https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/diffusion_models/wan2.2_i2v_low_noise_14B_fp8_scaled.safetensors" || true
+#wget -c -O "$BASE/diffusion_models/wan2.2_i2v_low_noise_14B_fp8_scaled.safetensors" \
+#  "https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/diffusion_models/wan2.2_i2v_low_noise_14B_fp8_scaled.safetensors" || true
 
-wget -c -O "$BASE/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors" \
-  "https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors" || true
+#wget -c -O "$BASE/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors" \
+#  "https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors" || true
 
-wget -c -O "$BASE/vae/wan_2.1_vae.safetensors" \
-  "https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/vae/wan_2.1_vae.safetensors" || true
+#wget -c -O "$BASE/vae/wan_2.1_vae.safetensors" \
+#  "https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/vae/wan_2.1_vae.safetensors" || true
 
 # Download the whole workflows folder from GitHub
 echo "=== Downloading workflows folder ==="
