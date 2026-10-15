@@ -83,6 +83,16 @@ hf buckets cp hf://buckets/unrealn3r/vast_loras/scg-anatomy-female-v2.safetensor
 hf buckets cp hf://buckets/unrealn3r/vast_loras/MS_Nude_Style_Flux_V2.safetensors /workspace/ComfyUI/models/loras/ || true
 hf buckets cp hf://buckets/unrealn3r/vast_loras/ae.safetensors /workspace/ComfyUI/models/vae/ae.safetensors || true
 
+mkdir -p /workspace/ComfyUI/models/insightface/models/antelopev2
+cd /tmp
+
+wget -c -O antelopev2.zip \
+  "https://github.com/deepinsight/insightface/releases/download/v0.7/antelopev2.zip"
+
+unzip -o antelopev2.zip -d /workspace/ComfyUI/models/insightface/models/antelopev2/
+
+ls -lh /workspace/ComfyUI/models/insightface/models/antelopev2/
+
 # Qwen models
 #wget -c -O "$BASE/diffusion_models/qwen_image_edit_2511_fp8mixed.safetensors" \
 #  "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_2511_fp8mixed.safetensors" || true
