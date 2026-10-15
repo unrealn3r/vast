@@ -37,31 +37,73 @@ echo "=== Downloading models and LoRAs ==="
 BASE="/workspace/ComfyUI/models"
 mkdir -p "$BASE/diffusion_models" "$BASE/text_encoders" "$BASE/vae" "$BASE/loras"
 
+#FLUX models
+
+#!/bin/bash
+set -e
+echo "=== Installing PuLID custom node ==="
+cd /workspace/ComfyUI/custom_nodes
+if [ ! -d "ComfyUI_PuLID_Flux_ll" ]; then
+  git clone --depth 1 https://github.com/lldacing/ComfyUI_PuLID_Flux_ll.git
+fi
+cd ComfyUI_PuLID_Flux_ll
+pip install -q -r requirements.txt || true
+pip install -q insightface onnxruntime-gpu facenet-pytorch --no-deps || true
+
+echo "=== Downloading models ==="
+BASE="/workspace/ComfyUI/models"
+mkdir -p "$BASE/unet" "$BASE/clip" "$BASE/vae" "$BASE/loras" "$BASE/pulid" "$BASE/insightface/models/antelopev2"
+
+# Flux base (full)
+wget -c -O "$BASE/unet/flux1-dev.safetensors" \
+  "https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/flux1-dev.safetensors" || true
+
+wget -c -O "$BASE/clip/clip_l.safetensors" \
+  "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/clip_l.safetensors" || true
+
+wget -c -O "$BASE/clip/t5xxl_fp16.safetensors" \
+  "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/t5xxl_fp16.safetensors" || true
+
+wget -c -O "$BASE/vae/ae.safetensors" \
+  "https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/ae.safetensors" || true
+
+# PuLID model
+wget -c -O "$BASE/pulid/pulid_flux_v0.9.1.safetensors" \
+  "https://huggingface.co/guozinan/PuLID/resolve/main/pulid_flux_v0.9.1.safetensors" || true
+
+# NSFW unlock LoRA
+wget -c -O "$BASE/loras/aidmaNSFWunlock-FLUX-V0.2.safetensors" \
+  "https://huggingface.co/shahtab/FLUXNSFWunlock/resolve/main/aidmaNSFWunlock-FLUX-V0.2.safetensors" || true
+
+echo "=== Done ==="
+echo "Restart ComfyUI after this finishes."
+echo "Place additional anatomy LoRAs into $BASE/loras/ manually."
+
 # Qwen models
-wget -c -O "$BASE/diffusion_models/qwen_image_edit_2511_fp8mixed.safetensors" \
-  "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_2511_fp8mixed.safetensors" || true
+#wget -c -O "$BASE/diffusion_models/qwen_image_edit_2511_fp8mixed.safetensors" \
+#  "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_2511_fp8mixed.safetensors" || true
 
-wget -c -O "$BASE/text_encoders/qwen_2.5_vl_7b_fp8_scaled.safetensors" \
-  "https://huggingface.co/Comfy-Org/HunyuanVideo_1.5_repackaged/resolve/main/split_files/text_encoders/qwen_2.5_vl_7b_fp8_scaled.safetensors" || true
+#wget -c -O "$BASE/text_encoders/qwen_2.5_vl_7b_fp8_scaled.safetensors" \
+#  "https://huggingface.co/Comfy-Org/HunyuanVideo_1.5_repackaged/resolve/main/split_files/text_encoders/qwen_2.5_vl_7b_fp8_scaled.safetensors" || true
 
-wget -c -O "$BASE/vae/qwen_image_vae.safetensors" \
-  "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/vae/qwen_image_vae.safetensors" || true
+#wget -c -O "$BASE/vae/qwen_image_vae.safetensors" \
+#  "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/vae/qwen_image_vae.safetensors" || true
 
 # Public LoRAs
-wget -c -O "$BASE/loras/Qwen-Image-Edit-2511-Lightning-8steps-V1.0-bf16.safetensors" \
-  "https://huggingface.co/lightx2v/Qwen-Image-Edit-2511-Lightning/resolve/main/Qwen-Image-Edit-2511-Lightning-8steps-V1.0-bf16.safetensors" || true
+#wget -c -O "$BASE/loras/Qwen-Image-Edit-2511-Lightning-8steps-V1.0-bf16.safetensors" \
+#  "https://huggingface.co/lightx2v/Qwen-Image-Edit-2511-Lightning/resolve/main/Qwen-Image-Edit-2511-Lightning-8steps-V1.0-bf16.safetensors" || true
 
-wget -c -O "$BASE/loras/Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors" \
-  "https://huggingface.co/lightx2v/Qwen-Image-Edit-2511-Lightning/resolve/main/Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors" || true
+#wget -c -O "$BASE/loras/Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors" \
+#  "https://huggingface.co/lightx2v/Qwen-Image-Edit-2511-Lightning/resolve/main/Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors" || true
 
-wget -c -O "$BASE/loras/Qwen_Snofs_1_3.safetensors" \
-  "https://huggingface.co/rkppvc/qwen_snofs_v13/resolve/main/Qwen_Snofs_1_3.safetensors" || true
+#wget -c -O "$BASE/loras/Qwen_Snofs_1_3.safetensors" \
+#  "https://huggingface.co/rkppvc/qwen_snofs_v13/resolve/main/Qwen_Snofs_1_3.safetensors" || true
 
-wget -c -O "$BASE/loras/qwen-edit-skin_1.1_000002750.safetensors" \
-  "https://huggingface.co/tlennon-ie/qwen-edit-skin/resolve/main/qwen-edit-skin_1.1_000002750.safetensors" || true
+#wget -c -O "$BASE/loras/qwen-edit-skin_1.1_000002750.safetensors" \
+#  "https://huggingface.co/tlennon-ie/qwen-edit-skin/resolve/main/qwen-edit-skin_1.1_000002750.safetensors" || true
 
-wget -c -O "$BASE/loras/Qwen-Smartphone.safetensors" \
-  "https://huggingface.co/ribilu74/qwensnapshot/resolve/main/Qwen-Smartphone.safetensors" || true
+#wget -c -O "$BASE/loras/Qwen-Smartphone.safetensors" \
+#  "https://huggingface.co/ribilu74/qwensnapshot/resolve/main/Qwen-Smartphone.safetensors" || true
 
 # Wan 2.2 (commented out)
 #wget -c -O "$BASE/diffusion_models/wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors" \
