@@ -56,7 +56,7 @@ mkdir -p "$BASE/unet" "$BASE/clip" "$BASE/vae" "$BASE/loras" "$BASE/pulid" "$BAS
 
 # Flux base (full)
 wget -c -O "$BASE/unet/flux1-dev.safetensors" \
-  "https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/flux1-dev.safetensors" || true
+  "https://huggingface.co/Comfy-Org/flux1-dev/resolve/main/flux1-dev.safetensors" || true
 
 wget -c -O "$BASE/clip/clip_l.safetensors" \
   "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/clip_l.safetensors" || true
