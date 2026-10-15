@@ -63,17 +63,6 @@ wget -c -O "$BASE/loras/qwen-edit-skin_1.1_000002750.safetensors" \
 wget -c -O "$BASE/loras/Qwen-Smartphone.safetensors" \
   "https://huggingface.co/ribilu74/qwensnapshot/resolve/main/Qwen-Smartphone.safetensors" || true
 
-# Private LoRAs from unrealn3r/vast_loras (requires HF_TOKEN)
-if [ -n "$HF_TOKEN" ]; then
-  echo "=== Downloading private LoRAs ==="
-  huggingface-cli download unrealn3r/vast_loras \
-    --local-dir "$BASE/loras" \
-    --token "$HF_TOKEN" \
-    --repo-type model || true
-else
-  echo "Warning: HF_TOKEN not set, skipping private LoRA download"
-fi
-
 # Wan 2.2 (commented out)
 #wget -c -O "$BASE/diffusion_models/wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors" \
 #  "https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/diffusion_models/wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors" || true
@@ -96,6 +85,18 @@ mkdir -p "$WORKFLOW_DIR"
 
 if [ -n "$HF_TOKEN" ]; then
   hf buckets sync hf://buckets/unrealn3r/workflows "$WORKFLOW_DIR" || true
+  echo "Workflows synced to $WORKFLOW_DIR"
+  ls -la "$WORKFLOW_DIR"
+else
+  echo "Warning: HF_TOKEN not set, skipping private workflow download"
+fi
+
+echo "=== Downloading workflows from private Hugging Face bucket ==="
+WORKFLOW_DIR="/workspace/ComfyUI/models/loras"
+mkdir -p "$WORKFLOW_DIR"
+
+if [ -n "$HF_TOKEN" ]; then
+  hf buckets sync hf://buckets/unrealn3r/vast-loras "$WORKFLOW_DIR" || true
   echo "Workflows synced to $WORKFLOW_DIR"
   ls -la "$WORKFLOW_DIR"
 else
