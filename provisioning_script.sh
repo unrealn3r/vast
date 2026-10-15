@@ -79,6 +79,9 @@ echo "=== Done ==="
 echo "Restart ComfyUI after this finishes."
 echo "Place additional anatomy LoRAs into $BASE/loras/ manually."
 
+hf buckets cp hf://buckets/unrealn3r/vast_loras/scg-anatomy-female-v2.safetensors /workspace/ComfyUI/models/loras/ || true
+hf buckets cp hf://buckets/unrealn3r/vast_loras/MS_Nude_Style_Flux_V2.safetensors /workspace/ComfyUI/models/loras/ || true
+
 # Qwen models
 #wget -c -O "$BASE/diffusion_models/qwen_image_edit_2511_fp8mixed.safetensors" \
 #  "https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_2511_fp8mixed.safetensors" || true
