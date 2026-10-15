@@ -47,7 +47,7 @@ wget -c -O "$BASE/text_encoders/qwen_2.5_vl_7b_fp8_scaled.safetensors" \
 wget -c -O "$BASE/vae/qwen_image_vae.safetensors" \
   "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/vae/qwen_image_vae.safetensors" || true
 
-# LoRAs
+# Public LoRAs
 wget -c -O "$BASE/loras/Qwen-Image-Edit-2511-Lightning-8steps-V1.0-bf16.safetensors" \
   "https://huggingface.co/lightx2v/Qwen-Image-Edit-2511-Lightning/resolve/main/Qwen-Image-Edit-2511-Lightning-8steps-V1.0-bf16.safetensors" || true
 
@@ -57,74 +57,54 @@ wget -c -O "$BASE/loras/Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetens
 wget -c -O "$BASE/loras/Qwen_Snofs_1_3.safetensors" \
   "https://huggingface.co/rkppvc/qwen_snofs_v13/resolve/main/Qwen_Snofs_1_3.safetensors" || true
 
-wget -c -O "$BASE/loras/qwen_2512_pussy_anus_v2.safetensors" \
-  "https://huggingface.co/Sentinel7/qwen-image/resolve/main/2289084/2576020/qwen_2512_pussy_anus_v2.safetensors" || true
-
 wget -c -O "$BASE/loras/qwen-edit-skin_1.1_000002750.safetensors" \
   "https://huggingface.co/tlennon-ie/qwen-edit-skin/resolve/main/qwen-edit-skin_1.1_000002750.safetensors" || true
 
 wget -c -O "$BASE/loras/Qwen-Smartphone.safetensors" \
   "https://huggingface.co/ribilu74/qwensnapshot/resolve/main/Qwen-Smartphone.safetensors" || true
 
-  # AmateurSelfie
-wget -c -O "$BASE/loras/AmateurSelfie_v2.safetensors" \
-  "https://huggingface.co/unrealn3r/vast_loras/resolve/main/AmateurSelfie_v2.safetensors" || true
+# Private LoRAs from unrealn3r/vast_loras (requires HF_TOKEN)
+if [ -n "$HF_TOKEN" ]; then
+  echo "=== Downloading private LoRAs ==="
+  huggingface-cli download unrealn3r/vast_loras \
+    --local-dir "$BASE/loras" \
+    --token "$HF_TOKEN" \
+    --repo-type model || true
+else
+  echo "Warning: HF_TOKEN not set, skipping private LoRA download"
+fi
 
-# HearmemanAI Breasts
-wget -c -O "$BASE/loras/HearmemanAI_V4_Rank128_BreastsLoRA_Epoch80.safetensors" \
-  "https://huggingface.co/unrealn3r/vast_loras/resolve/main/HearmemanAI_V4_Rank128_BreastsLoRA_Epoch80.safetensors" || true
-
-# Unblur and Upscale
-wget -c -O "$BASE/loras/Qwen-Image-Edit-Unblur-Upscale_20.safetensors" \
-  "https://huggingface.co/unrealn3r/vast_loras/resolve/main/Qwen-Image-Edit-Unblur-Upscale_20.safetensors" || true
-
-# SEXGOD Female Nudity v2
-wget -c -O "$BASE/loras/SEXGOD_FemaleNudity_QwenEdit_2511_v2.safetensors" \
-  "https://huggingface.co/unrealn3r/vast_loras/resolve/main/SEXGOD_FemaleNudity_QwenEdit_2511_v2.safetensors" || true
-
-# SEXGOD Masturbate
-wget -c -O "$BASE/loras/SEXGOD_masturbate_QwenEdit2511_v1.safetensors" \
-  "https://huggingface.co/unrealn3r/vast_loras/resolve/main/SEXGOD_masturbate_QwenEdit2511_v1.safetensors" || true
-
-# SexGod Couples Nudity
-wget -c -O "$BASE/loras/SexGod_CouplesNudity_QwenEdit_2511_v1.safetensors" \
-  "https://huggingface.co/unrealn3r/vast_loras/resolve/main/SexGod_CouplesNudity_QwenEdit_2511_v1.safetensors" || true
-
-# NSFW Adv
-wget -c -O "$BASE/loras/qwen-image_nsfw_adv_v1.0.safetensors" \
-  "https://huggingface.co/unrealn3r/vast_loras/resolve/main/qwen-image_nsfw_adv_v1.0.safetensors" || true
-
-# Pussy & Anus
-wget -c -O "$BASE/loras/qwen_2512_pussy_anus_v2.safetensors" \
-  "https://huggingface.co/unrealn3r/vast_loras/resolve/main/qwen_2512_pussy_anus_v2.safetensors" || true
-
-# Wan 2.2
+# Wan 2.2 (commented out)
 #wget -c -O "$BASE/diffusion_models/wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors" \
 #  "https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/diffusion_models/wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors" || true
-
 #wget -c -O "$BASE/diffusion_models/wan2.2_i2v_low_noise_14B_fp8_scaled.safetensors" \
 #  "https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/diffusion_models/wan2.2_i2v_low_noise_14B_fp8_scaled.safetensors" || true
-
 #wget -c -O "$BASE/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors" \
 #  "https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors" || true
-
 #wget -c -O "$BASE/vae/wan_2.1_vae.safetensors" \
 #  "https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/vae/wan_2.1_vae.safetensors" || true
 
-# Download the whole workflows folder from GitHub
-echo "=== Downloading workflows folder ==="
+echo "=== Downloading ship2hf.sh ==="
+wget -c -O /workspace/ship2hf.sh \
+  "https://raw.githubusercontent.com/unrealn3r/vast/refs/heads/main/ship2hf.sh" || true
+chmod +x /workspace/ship2hf.sh
+echo "Saved to /workspace/ship2hf.sh"
+
+echo "=== Downloading workflows from private Hugging Face repo ==="
 WORKFLOW_DIR="/workspace/ComfyUI/user/default/workflows"
 mkdir -p "$WORKFLOW_DIR"
 
-# Sparse checkout so we only get the workflows folder
-cd /tmp
-rm -rf vast-workflows
-git clone --depth 1 --filter=blob:none --sparse https://github.com/unrealn3r/vast.git vast-workflows
-cd vast-workflows
-git sparse-checkout set workflows
-cp -r workflows/* "$WORKFLOW_DIR/" || true
+pip install -q huggingface_hub || true
 
-echo "Workflows copied to $WORKFLOW_DIR"
-ls -la "$WORKFLOW_DIR"
+if [ -n "$HF_TOKEN" ]; then
+  huggingface-cli download unrealn3r/workflows \
+    --local-dir "$WORKFLOW_DIR" \
+    --token "$HF_TOKEN" \
+    --repo-type model || true
+  echo "Workflows downloaded to $WORKFLOW_DIR"
+  ls -la "$WORKFLOW_DIR"
+else
+  echo "Warning: HF_TOKEN not set, skipping private workflow download"
+fi
 
 echo "=== Provisioning complete ==="
