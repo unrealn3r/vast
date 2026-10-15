@@ -82,7 +82,6 @@ echo "Saved to /workspace/ship2hf.sh"
 echo "=== Downloading workflows from private Hugging Face bucket ==="
 WORKFLOW_DIR="/workspace/ComfyUI/user/default/workflows"
 mkdir -p "$WORKFLOW_DIR"
-
 if [ -n "$HF_TOKEN" ]; then
   hf buckets sync hf://buckets/unrealn3r/workflows "$WORKFLOW_DIR" || true
   echo "Workflows synced to $WORKFLOW_DIR"
@@ -91,16 +90,15 @@ else
   echo "Warning: HF_TOKEN not set, skipping private workflow download"
 fi
 
-echo "=== Downloading workflows from private Hugging Face bucket ==="
-WORKFLOW_DIR="/workspace/ComfyUI/models/loras"
-mkdir -p "$WORKFLOW_DIR"
-
+echo "=== Downloading LoRAs from private Hugging Face bucket ==="
+LORA_DIR="/workspace/ComfyUI/models/loras"
+mkdir -p "$LORA_DIR"
 if [ -n "$HF_TOKEN" ]; then
-  hf buckets sync hf://buckets/unrealn3r/vast-loras "$WORKFLOW_DIR" || true
-  echo "Workflows synced to $WORKFLOW_DIR"
-  ls -la "$WORKFLOW_DIR"
+  hf buckets sync hf://buckets/unrealn3r/vast_loras "$LORA_DIR" || true
+  echo "LoRAs synced to $LORA_DIR"
+  ls -la "$LORA_DIR"
 else
-  echo "Warning: HF_TOKEN not set, skipping private workflow download"
+  echo "Warning: HF_TOKEN not set, skipping private LoRA download"
 fi
 
 echo "=== Provisioning complete ==="
