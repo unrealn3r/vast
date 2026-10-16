@@ -12,12 +12,17 @@ echo "[1/6] Checking prerequisites..."
 command -v git >/dev/null || { echo "Error: git missing"; exit 1; }
 command -v python3 >/dev/null || { echo "Error: python3 missing"; exit 1; }
 
-# Node.js / npm check
+# Node.js / npm
 if ! command -v npm >/dev/null; then
   echo "Installing Node.js..."
   curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
   apt-get install -y nodejs
 fi
+
+# OpenCV dependencies (Ubuntu 24.04 / Noble compatible)
+echo "Installing OpenCV system libraries..."
+apt-get update
+apt-get install -y libgl1 libglib2.0-0t64 || apt-get install -y libgl1 libglib2.0-0 || true
 
 echo "[2/6] Cloning AI Toolkit..."
 if [[ -d "$INSTALL_DIR/.git" ]]; then
@@ -46,7 +51,7 @@ cd ui
 npm install
 npm run build
 
-# Initialize Prisma database (fixes "Queue does not exist" error)
+# Initialize Prisma database
 npx prisma generate
 npx prisma db push || true
 
