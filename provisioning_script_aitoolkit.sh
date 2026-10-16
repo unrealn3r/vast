@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+mkdir -p /workspace/hf-cache
+export HF_HOME=/workspace/hf-cache
+export HUGGINGFACE_HUB_CACHE=/workspace/hf-cache
+echo 'export HF_HOME=/workspace/hf-cache' >> ~/.bashrc
+echo 'export HUGGINGFACE_HUB_CACHE=/workspace/hf-cache' >> ~/.bashrc
+
 echo "=== AI Toolkit Provisioning Script ==="
 LOG="/var/log/ai-toolkit-provision.log"
 exec > >(tee -a "$LOG") 2>&1
